@@ -89,10 +89,6 @@ body {
       float: left;
     }
   
-    .right-side {
-      width: 50%;
-      float: left;
-    }
   }
   
   @media (min-width: 768px) {
@@ -321,5 +317,21 @@ body {
 
   .btn-div {
     text-align: center;
+  }
+
+  .page-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    margin-bottom: 10rem;
+  }
+
+  .account {
+    padding-left: 1rem;
+  }
+  
+  .account a:hover {
+    color: $primary-color;
   }
   

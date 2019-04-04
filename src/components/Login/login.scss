@@ -1,0 +1,13 @@
+@import '../../../public/styles/color.scss';
+
+.float-right {
+    float: right !important;
+  }
+  
+  .forget:hover {
+    color: $primary-color;
+  }
+  
+  .forget {
+    color: inherit;
+  }
