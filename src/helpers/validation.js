@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-const signUpValidationSchema = Yup.object().shape({
+export const signUpValidationSchema = Yup.object().shape({
   firstname: Yup.string()
     .min(3, 'Please enter no less than 3 characters')
     .max(30, 'Please enter no more than 30 characters')
@@ -28,4 +28,10 @@ const signUpValidationSchema = Yup.object().shape({
     .required('Confirm your password')
 });
 
-export default signUpValidationSchema;
+export const loginValidationSchema = Yup.object().shape({
+  email: Yup.string().email()
+    .required('Please enter your email'),
+  password: Yup.string()
+    .min(6, 'Please enter no less than 6 characters')
+    .required('Please enter your password'),
+});
