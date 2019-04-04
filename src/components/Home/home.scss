@@ -1,0 +1,154 @@
+@import '../../../public/styles/color.scss';
+
+.slide-img {
+    background-image: url('../../../public/images/give-info.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    display: block;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+  
+  .banner {
+    max-width: 1188px;
+    margin: 0 auto;
+    display: flex;
+    text-align: center;
+    padding: 0 15px;
+    color: $text-color;
+  }
+  
+  .banner-text {
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+    max-width: 520px;
+    position: relative;
+    padding-top: 15rem;
+    padding-bottom: 15rem;
+  
+  
+  h1 {
+    letter-spacing: -0.5px;
+    font-weight: 600;
+    margin-bottom: 0;
+    font-size: 2.688rem;
+  }
+  
+  p {
+    margin-top: 20px;
+    font-size: 1.375rem;
+    margin-bottom: 1.4rem;
+  }
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  
+  .left-side {
+    position: relative;
+    min-height: 1px;
+  }
+  
+  .bg-color {
+    padding: 12px 16px;
+    margin-right: 20px;
+    flex: 1 1 0%;
+    margin-top: 20px;
+    background-color: $main-color;
+    color: $text-color;
+  }  
+  
+  .text-section {
+    padding: 10px;
+
+    h3 {
+        margin: 0 0 15px;
+        font-weight: 600;
+        font-size: 18px;
+      }
+
+      p {
+        margin-bottom: 4px;
+      }
+  }
+
+  .btn {
+    height: 42px;
+    padding: 10px 30px;
+    color: $text-color;
+    border-radius: 0;
+    font-weight: 600;
+    border: none;
+    background-color: $primary-color;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    outline: none;
+  }
+  
+  .p-text {
+    margin: 0 0 10px;
+  }
+
+  .menu-container {
+    max-width: 960px;
+    margin: 20px auto;
+  }
+  
+  .menu-div {
+    margin-top: 0px !important;
+  }
+  
+  .menu-section {
+    padding: 40px 0px;
+  }
+
+  .img-fluid {
+    display: block;
+    height: auto;
+    max-width: 100%;
+  }
+
+  .column {
+    margin-right: 20px;
+    flex: 1 1 0%;
+    margin-top: 20px;
+  }
+  
+  .intervention {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: var(--main-color);
+  }
+
+  .card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    padding: 4px;
+  }
+
+  .image-description {
+    padding: 10px 0px;
+
+    h4 {
+        text-align: center;
+    }
+  }

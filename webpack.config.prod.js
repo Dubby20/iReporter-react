@@ -12,7 +12,7 @@ module.exports = merge(common, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        API_URL: JSON.stringify('https://ireporter247.herokuapp.com/')
+        API_URL: JSON.stringify('https://ireporter247.herokuapp.com/api/v1')
       }
     }),
     new OptimizeCSSAssetsPlugin({})
