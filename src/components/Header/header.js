@@ -16,7 +16,7 @@ i
     <div>
       <nav id="nav" role="navigation">
         <ul>
-          <li><Link to="/" className="showBtn active">Home</Link></li>
+          <li><Link to="/" className="showBtn">Home</Link></li>
           <li><Link to="/profile" className="showBtn">My Profile</Link></li>
           <li><Link to="/report" className="showBtn">Report</Link></li>
           <li>

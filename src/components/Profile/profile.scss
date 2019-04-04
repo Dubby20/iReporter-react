@@ -1,0 +1,56 @@
+@import '../../../public/styles/color.scss';
+
+
+.admin-container {
+    margin: 20px auto 0 auto;
+    padding: 0 24% 0 10%;
+    justify-content: space-between;
+  }
+  
+  .status {
+    padding: 12px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    flex: 1 0 auto;
+    flex-basis: 30%;
+  }
+  
+  .status-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    text-align: center;
+    border-radius: 8px;
+    color: $text-color;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .status-box {
+    margin: 1rem;
+    background: $text-color;
+    overflow: hidden;
+    cursor: pointer;
+    line-height: 40px;
+  }
+  
+  .status-title {
+    text-align: center;
+  }
+  
+  .draft-bg {
+    background-color: #ffc107;
+  }
+  
+  .investigation-bg {
+    background-color: #007bff;
+  }
+  
+  .resolved-bg {
+    background-color: #28a745;
+  }
+  
+  .rejected-bg {
+    background-color: #dc3545;
+  }
+  

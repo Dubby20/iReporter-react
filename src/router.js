@@ -5,6 +5,7 @@ import NotFoundPage from './containers/404Page/notFound';
 import Signup from './components/SignUp/signup';
 import Login from './components/Login/login';
 import Report from './components/Report/report';
+import Profile from './components/Profile/profile';
 
 const Router = () => (
   <Switch>
@@ -12,6 +13,7 @@ const Router = () => (
     <Route exact path="/signup" component={Signup} />
     <Route exact path="/login" component={Login} />
     <Route exact path="/report" component={Report} />
+    <Route exact path="/profile" component={Profile} />
     <Route path="*" component={NotFoundPage} />
   </Switch>
 );
