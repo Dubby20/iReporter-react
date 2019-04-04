@@ -1,0 +1,57 @@
+@import '../../../public/styles/color.scss';
+
+
+.page-border {
+    border-radius: 4px;
+  }
+
+  .heading {
+    background-color: $main-color;
+    height: 40px;
+    border-radius: 4px;
+
+    h3 {
+      color: $text-color;
+      text-align: center;
+      text-transform: uppercase;
+      padding: 8px;
+    }
+  }
+   
+  .report {
+    background: #f5f5f5;
+    padding: 16px;
+    border: 1px solid #e5e5e5;
+    margin: 0px 2px;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 5px 0px;
+  }
+  
+  .send-btn {
+    background: $main-color;
+    border-color: $main-color;
+    cursor: pointer;
+    padding: 0.375rem 1.2rem;
+    color: $text-color;
+    border-radius: 4px;
+    line-height: 24px;
+    font-size: 1rem;
+    font-weight: 700;
+    border: 1px solid $main-color;
+    margin-top: 8px;
+    outline: none;
+  }
+
+  .location-btn {
+    color: #007bff;
+  }
+  
+  .location-btn:hover {
+    color: $primary-color;
+  }
+  
+  #location-code {
+    padding-top: 8px;
+    font-weight: 600;
+  }
+  

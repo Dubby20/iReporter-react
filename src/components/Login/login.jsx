@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 /* eslint-disable jsx-a11y/no-autofocus */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
@@ -35,7 +36,7 @@ class Login extends Component {
                 <input type="submit" value="LOGIN" className="auth-btn" />
               </div>
               <div className="loginLoader loader">
-                <img src="./assets/images/spinner.gif" alt="spinner" />
+                <img src={require('../../../public/images/spinner.gif')} alt="spinner" className="" />
               </div>
             </form>
           </div>
