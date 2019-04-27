@@ -39,8 +39,8 @@ class Signup extends Component {
   render() {
     const { user } = this.state;
     const { registerRequest, isLoading } = this.props;
-    return (
 
+    return (
       <div className="page-container">
         <div className="signUp-login">
           <h3>Create an account</h3>
@@ -97,7 +97,6 @@ class Signup extends Component {
                 </div>
               </Form>
             )}
-
           </Formik>
         </div>
         <div className="account">
@@ -107,7 +106,6 @@ class Signup extends Component {
           </p>
         </div>
       </div>
-
     );
   }
 }
