@@ -2,7 +2,7 @@
 import axios from 'axios';
 import {
   REGISTER_SUCCESS, REGISTER_BEGIN, REGISTER_DONE, LOGIN_SUCCESS, LOGIN_BEGIN, LOGIN_DONE, NEW_NOTIFICATION, GET_REDFLAG,
-  START_FETCHING, STOP_FETCHING
+  GET_INTERVENTION, START_FETCHING, STOP_FETCHING
 } from '../actions/actionsTypes';
 import { clearNotification, newNotification } from './notificationServices';
 
@@ -67,6 +67,28 @@ export const redFlagRequest = () => async (dispatch) => {
 
     dispatch({
       type: GET_REDFLAG,
+      records: recordList,
+    });
+
+    dispatch({ type: STOP_FETCHING });
+    return data;
+  } catch (error) {
+    return error.response.data.error;
+  }
+};
+
+export const interventionRequest = () => async (dispatch) => {
+
+  try {
+    dispatch({ type: START_FETCHING });
+    const token = localStorage.getItem('userToken');
+    const { data } = await axios.get(`${apiUrl}/interventions`, {
+      headers: { 'x-access-token': token }
+    });
+    const recordList = data.data[0].intervention;
+
+    dispatch({
+      type: GET_INTERVENTION,
       records: recordList,
     });
 

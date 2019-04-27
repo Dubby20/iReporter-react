@@ -4,17 +4,17 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Loader from '../Loader/Loader';
-import { redFlagRequest } from '../../services/userServices';
+import { interventionRequest } from '../../services/userServices';
 
 
 
-class RedFlag extends Component {
+class Intervention extends Component {
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
-    this.props.redFlagRequest();
+    this.props.interventionRequest();
   }
 
 
@@ -36,12 +36,12 @@ class RedFlag extends Component {
                   </p>
                 </div>
                 <div id="image-frame">
-                  <Link to="/red-flags/" target="_self" className="red-flag">
+                  <Link to="/intervention" target="_self" className="red-flag">
                     {item.images.length === 0 ? <p>No Image Uploaded</p> : <img src={(item.images.slice(0, 1))} alt="" className="item" height="200" width="240" />}
                   </Link>
                 </div>
                 <div className="comment-div">
-                  <Link to="/red-flags/" title="red-flag" className="comment">
+                  <Link to="/intervention" title="intervention" className="comment">
                     {item.comment.slice(0, 150)}
                     ...
                   </Link>
@@ -55,8 +55,8 @@ class RedFlag extends Component {
   }
 }
 
-RedFlag.propTypes = {
-  redFlagRequest: PropTypes.func.isRequired,
+Intervention.propTypes = {
+  interventionRequest: PropTypes.func.isRequired,
 };
 
 
@@ -65,6 +65,6 @@ const mapStateToProps = state => ({
   records: state.recordReducer.records
 });
 
-const connectedRedFlag = connect(mapStateToProps, { redFlagRequest })(RedFlag);
+const connectedIntervention = connect(mapStateToProps, { interventionRequest })(Intervention);
 
-export default connectedRedFlag;
+export default connectedIntervention;

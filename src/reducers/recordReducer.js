@@ -1,4 +1,4 @@
-import { GET_REDFLAG, START_FETCHING, STOP_FETCHING } from '../actions/actionsTypes';
+import { GET_REDFLAG, GET_INTERVENTION, START_FETCHING, STOP_FETCHING } from '../actions/actionsTypes';
 
 const initialState = {
   records: [],
@@ -13,6 +13,7 @@ const recordReducer = (state = initialState, action) => {
       };
 
     case GET_REDFLAG:
+    case GET_INTERVENTION:
       return {
         ...state, records: action.records
       };
