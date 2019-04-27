@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './helpers/store';
+import App from './App';
 
-const title = <h1>iReporter</h1>;
 
 ReactDOM.render(
-  <div>{title}</div>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('app')
 );
-
-module.hot.accept();
