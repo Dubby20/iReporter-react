@@ -24,6 +24,8 @@ class Login extends Component {
     };
   }
 
+  
+
   redirect = (to) => {
     const { history } = this.props;
     history.push(to);
