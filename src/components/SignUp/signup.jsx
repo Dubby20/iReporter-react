@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Formik, Form, ErrorMessage } from 'formik';
-import signUpValidationSchema from '../../helpers/validation';
+import { signUpValidationSchema } from '../../helpers/validation';
 import { registerRequest } from '../../services/userServices';
 import Loader from '../Loader/Loader';
 import Notification from '../Notification/Notification';
@@ -116,7 +116,7 @@ Signup.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  isLoading: state.registerReducer.isLoading
+  isLoading: state.authReducer.isLoading
 });
 
 const connectedRegisterPage = connect(mapStateToProps, { registerRequest })(Signup);
