@@ -5,7 +5,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { userActions } from '../../actions/userActions';
+import { Formik, Form, ErrorMessage } from 'formik';
+import signUpValidationSchema from '../../helpers/validation';
+import { registerRequest } from '../../services/userServices';
+import Loader from '../Loader/Loader';
+import Notification from '../Notification/Notification';
 import './signup.scss';
 
 class Signup extends Component {
@@ -23,102 +27,77 @@ class Signup extends Component {
         password: '',
         confirmPassword: ''
       },
-      submitted: false
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    const { name, value } = event.target;
-    const { user } = this.state;
-    this.setState({
-      user: {
-        ...user,
-        [name]: value
-      }
-    });
+  redirect = () => {
+    const { history } = this.props;
+    history.push('/');
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.setState({ submitted: true });
-    const { user } = this.state;
-    const { dispatch } = this.props;
-    if (user.firstname && user.lastname && user.username && user.othernames && user.email
-      && user.phoneNumber && user.password) {
-      dispatch(userActions.register(user));
-    }
-  }
-  // passwordsMatch = () =>
-  // const {
-  //   password === confirmPassword
-  // } = this.state.user;
-  // this.state.user.password === this.state.user.confirmPassword;
 
   render() {
-    const { registering } = this.props;
-    const { user, submitted } = this.state;
-    return (
+    const { user } = this.state;
+    const { registerRequest, isLoading } = this.props;
 
+    return (
       <div className="page-container">
         <div className="signUp-login">
           <h3>Create an account</h3>
-          <form id="registerForm" onSubmit={this.handleSubmit}>
-            <div className="msg-div" id="msg-error" />
-            <div className={`form-group ${submitted && !user.firstName} ? ' has-error' : '')`}>
-              <input type="text" name="firstname" value={user.firstname} placeholder="Firstname" autoFocus required minLength="3" id="firstname" className="form-control" onChange={this.handleChange} />
-              {submitted && !user.firstname
-                && <div className="help-block">First Name is required</div>
+          <Notification />
+          <Formik
+            initialValues={user}
+            validationSchema={signUpValidationSchema}
+            onSubmit={async (values, { setSubmitting }) => {
+              if (await registerRequest(values)) {
+                setSubmitting(true);
+                this.redirect();
               }
-            </div>
-            <div className={`form-group ${submitted && !user.lastname} ? ' has-error' : '')`}>
-              <input type="text" name="lastname" value={user.lastname} placeholder="Lastname" required minLength="3" id="lastname" className="form-control" onChange={this.handleChange} />
-              {submitted && !user.lastName
-                && <div className="help-block">Last Name is required</div>
-              }
-            </div>
-            <div className={`form-group ${submitted && !user.othernames} ? ' has-error' : '')`}>
-              <input type="text" name="othernames" value={user.othernames} onChange={this.handleChange} placeholder="Other names" required minLength="3" id="othernames" className="form-control" />
-              {submitted && !user.othernames
-                && <div className="help-block">Other Name is required</div>
-              }
-            </div>
-            <div className={`form-group ${submitted && !user.email} ? ' has-error' : '')`}>
-              <input type="email" name="email" value={user.email} onChange={this.handleChange} placeholder="Email" required id="email" className="form-control" />
-              {submitted && !user.email
-                && <div className="help-block">Email is required</div>
-              }
-            </div>
-            <div className={`form-group ${submitted && !user.phoneNumber} ? ' has-error' : '')`}>
-              <input type="tel" name="phoneNumber" value={user.phoneNumber} onChange={this.handleChange} placeholder="Phone Number" required id="phoneNumber" className="form-control" />
-              {submitted && !user.phoneNumber
-                && <div className="help-block">Phone Number is required</div>
-              }
-            </div>
-            <div className={`form-group ${submitted && !user.username} ? ' has-error' : '')`}>
-              <input type="text" name="username" value={user.username} onChange={this.handleChange} placeholder="Username" required minLength="3" id="username" className="form-control" />
-              {submitted && !user.username
-                && <div className="help-block">Username is required</div>
-              }
-            </div>
-            <div className="form-group">
-              <input type="password" name="password" onChange={this.handleChange} placeholder="Password" required minLength="6" id="password" className="form-control" />
-              {submitted && !user.password
-                && <div className="help-block">Password is required</div>
-              }
-            </div>
-            <div className={`form-group ${submitted && this.passwordsMatch() ? 'has-error' : ''})`}>
-              <input type="password" name="confirmPassword" onChange={this.handleChange} placeholder="Confirm Password" required minLength="6" id="confirmPassword" className="form-control" />
-            </div>
-            <div className="form-group btn-div">
-              <input type="submit" value="SIGN UP" className="auth-btn" />
-              {registering
-                && <img src={require('../../../public/images/spinner.gif')} alt="spinner" className="" />
-              }
-            </div>
-          </form>
+            }}
+          >
+            {props => (
+              <Form id="registerForm" onSubmit={props.handleSubmit}>
+                <ErrorMessage name="firstname">{msg => <div className="error error-message">{msg}</div>}</ErrorMessage>
+                <div className="form-group">
+                  <input type="text" name="firstname" value={props.values.firstname} placeholder="Firstname" autoFocus id="firstname" className="form-control" onChange={props.handleChange} />
+                </div>
+                <ErrorMessage name="lastname">{msg => <div className="error error-message">{msg}</div>}</ErrorMessage>
+                <div className="form-group">
+                  <input type="text" name="lastname" value={props.values.lastname} placeholder="Lastname" id="lastname" className="form-control" onChange={props.handleChange} />
+                </div>
+                <ErrorMessage name="othernames">{msg => <div className="error error-message">{msg}</div>}</ErrorMessage>
+                <div className="form-group">
+                  <input type="text" name="othernames" value={props.values.othernames} onChange={props.handleChange} placeholder="Other names" id="othernames" className="form-control" />
+                </div>
+                <ErrorMessage name="email">{msg => <div className="error error-message">{msg}</div>}</ErrorMessage>
+                <div className="form-group">
+                  <input type="email" name="email" value={props.values.email} onChange={props.handleChange} placeholder="Email" required id="email" className="form-control" />
+                </div>
+                <ErrorMessage name="phoneNumber">{msg => <div className="error error-message">{msg}</div>}</ErrorMessage>
+                <div className="form-group">
+                  <input type="tel" name="phoneNumber" value={props.values.phoneNumber} onChange={props.handleChange} placeholder="Phone Number" required id="phoneNumber" className="form-control" />
+                </div>
+                <ErrorMessage name="username">{msg => <div className="error error-message">{msg}</div>}</ErrorMessage>
+                <div className="form-group">
+                  <input type="text" name="username" value={props.values.username} onChange={props.handleChange} placeholder="Username" id="username" className="form-control" />
+                </div>
+                <ErrorMessage name="password">{msg => <div className="error error-message">{msg}</div>}</ErrorMessage>
+                <div className="form-group">
+                  <input type="password" name="password" value={props.values.password} onChange={props.handleChange} placeholder="Password" id="password" className="form-control" />
+                </div>
+                <ErrorMessage name="confirmPassword">{msg => <div className="error error-message">{msg}</div>}</ErrorMessage>
+                <div className="form-group">
+                  <input type="password" name="confirmPassword" onChange={props.handleChange} placeholder="Confirm Password" id="confirmPassword" className="form-control" />
+                </div>
+                <div className="form-group btn-div">
+                  <input type="submit" value="SIGN UP" className="auth-btn" />
+                </div>
+                <div className="center">
+                  {isLoading ? <Loader /> : ''}
+                </div>
+              </Form>
+            )}
+          </Formik>
         </div>
         <div className="account">
           <p>
@@ -132,17 +111,13 @@ class Signup extends Component {
 }
 
 Signup.propTypes = {
-  registering: PropTypes.string.isRequired,
-  dispatch: PropTypes.string.isRequired
+  registerRequest: PropTypes.func.isRequired,
+
 };
 
+const mapStateToProps = state => ({
+  isLoading: state.registerReducer.isLoading
+});
 
-const mapStateToProps = (state) => {
-  const { registering } = state.registration;
-  return {
-    registering
-  };
-};
-
-const connectedRegisterPage = connect(mapStateToProps)(Signup);
-export { connectedRegisterPage as Signup };
+const connectedRegisterPage = connect(mapStateToProps, { registerRequest })(Signup);
+export default connectedRegisterPage;

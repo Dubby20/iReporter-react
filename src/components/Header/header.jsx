@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './header.scss';
@@ -7,7 +8,7 @@ const Header = () => (
   <div className="container">
     <div className="centered">
       <dt className="logo">
-i
+        i
         <span className="logo-name">Reporter</span>
       </dt>
       <dd className="logo-text">Speak up. Ask for help.</dd>
@@ -16,18 +17,18 @@ i
     <div>
       <nav id="nav" role="navigation">
         <ul>
-          <li><Link to="/" className="showBtn active">Home</Link></li>
-          <li><Link to="/profile" className="showBtn">My Profile</Link></li>
-          <li><Link to="/report" className="showBtn">Report</Link></li>
+          <li><Link to="/" className="active">Home</Link></li>
+          <li><Link to="/profile">My Profile</Link></li>
+          <li><Link to="/report">Report</Link></li>
           <li>
-            <Link to="/redFlag" className="showBtn">Red-flags</Link>
+            <Link to="/redFlag">Red-flags</Link>
           </li>
           <li>
-            <Link to="/intervention" className="showBtn">Interventions</Link>
+            <Link to="/intervention">Interventions</Link>
           </li>
-          <li><a href="#" className="showBtn logOut">Log out</a></li>
-          <li><Link to="/login" className="hideBtn">Login</Link></li>
-          <li><Link to="/signup" className="hideBtn">Register</Link></li>
+          <li><Link to="">Log out</Link></li>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/signup">Register</Link></li>
         </ul>
       </nav>
     </div>

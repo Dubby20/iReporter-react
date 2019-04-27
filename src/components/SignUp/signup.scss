@@ -16,7 +16,12 @@
     color: $primary-color;
   }
 
-  .help-block { 
-    font-size: 12px;
-    color: $primary-color;
-  }
+.error-message {
+  color: $primary-color;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.center {
+  text-align: center;
+}

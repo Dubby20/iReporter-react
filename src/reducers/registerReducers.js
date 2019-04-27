@@ -1,22 +1,27 @@
 /* eslint-disable import/prefer-default-export */
 import {
-  registerRequest,
-  registerSuccess,
-  registerFailure
-} from '../actions/registerActions';
+  REGISTER_SUCCESS, REGISTER_BEGIN, REGISTER_DONE,
+} from '../actions/actionsTypes';
 
-const initialState = {};
+const initialState = {
+  user: {},
+  isLoading: false
+};
 
-export const registration = (state = initialState, action) => {
+export const registerReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case registerRequest:
+    case REGISTER_BEGIN:
       return {
-        registering: true
+        ...state, isLoading: true
       };
-    case registerSuccess:
-      return {};
-    case registerFailure:
-      return {};
+    case REGISTER_SUCCESS:
+      return {
+        ...state, user: action.user
+      };
+    case REGISTER_DONE:
+      return {
+        ...state, isLoading: false
+      };
     default:
       return state;
   }

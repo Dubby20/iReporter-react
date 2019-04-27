@@ -1,0 +1,20 @@
+.notification {
+  p { color: white; }
+
+  .error { background-color: red; }
+  .info { background-color: blue; }
+  .success { background-color: green; }
+
+  .hide {
+    height: 0;
+    transition: all 300ms ease;
+  }
+
+  .show {
+    padding: 1rem;;
+    margin: 1em 0;
+    height: 100%;
+    border-radius: 0.25rem;
+    transition: all 300ms ease;
+  }
+}

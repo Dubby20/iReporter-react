@@ -12,7 +12,8 @@ body {
     width: 100%;
     min-height: 100vh;
     font-weight: 400;
-    background: #ffffff;
+    font-size: 1rem;
+    background: $text-color;
     color: #383838;
   }
 
@@ -187,7 +188,7 @@ body {
     }
   
     .table-responsive > .table > tbody > tr > td {
-      background-color: #fff;
+      background-color: $text-color;
       display: block;
       text-align: right;
     }
@@ -215,7 +216,7 @@ body {
   
     .table-responsive > .table-border > tbody > tr > td,
     .table-responsive > .table-border > tbody > tr:nth-child(odd) {
-      background-color: #fff;
+      background-color: $text-color;
     }
   
     .table-responsive > .table-border > tbody > tr > td:nth-child(odd) {
@@ -232,19 +233,19 @@ body {
     }
   }
   
-  @media only screen and (min-width: 450px) {
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 4;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.4);
-      padding-top: 4px;
-    }
+@media only screen and (min-width: 450px) {
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 4;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 4px;
+  }
   
 }
 
