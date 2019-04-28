@@ -1,8 +1,9 @@
-import { GET_REDFLAG, GET_INTERVENTION, GET_SINGLE_RECORD, START_FETCHING, STOP_FETCHING } from '../actions/actionsTypes';
+import { GET_REDFLAG, GET_INTERVENTION, GET_SINGLE_RECORD, START_FETCHING, STOP_FETCHING, EDIT_COMMENT } from '../actions/actionsTypes';
 
 const initialState = {
   records: [],
-  isLoading: false
+  isLoading: false,
+  isVisible: false
 };
 
 const recordReducer = (state = initialState, action) => {

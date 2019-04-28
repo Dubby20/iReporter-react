@@ -15,7 +15,6 @@ export const registerRequest = (user) => async (dispatch) => {
     dispatch(clearNotification());
 
     const { data } = await axios.post(`${apiUrl}/auth/signup`, { ...user });
-    localStorage.setItem('userToken', data.data[0].token);
 
     dispatch({
       type: REGISTER_SUCCESS,
@@ -40,7 +39,6 @@ export const loginRequest = (user) => async (dispatch) => {
     dispatch(clearNotification());
 
     const { data } = await axios.post(`${apiUrl}/auth/login`, { ...user });
-    localStorage.setItem('userToken', data.data[0].token);
 
     dispatch({
       type: LOGIN_SUCCESS,
@@ -57,11 +55,11 @@ export const loginRequest = (user) => async (dispatch) => {
   }
 };
 
-export const redFlagRequest = () => async (dispatch) => {
+export const redFlagRequest = () => async (dispatch, getState) => {
 
   try {
     dispatch({ type: START_FETCHING });
-    const token = localStorage.getItem('userToken');
+    const { token } = getState().authReducer.user;
     const { data } = await axios.get(`${apiUrl}/red-flags`, {
       headers: { 'x-access-token': token }
     });
@@ -80,11 +78,11 @@ export const redFlagRequest = () => async (dispatch) => {
   }
 };
 
-export const interventionRequest = () => async (dispatch) => {
+export const interventionRequest = () => async (dispatch, getState) => {
 
   try {
     dispatch({ type: START_FETCHING });
-    const token = localStorage.getItem('userToken');
+    const { token } = getState().authReducer.user;
     const { data } = await axios.get(`${apiUrl}/interventions`, {
       headers: { 'x-access-token': token }
     });
@@ -103,10 +101,10 @@ export const interventionRequest = () => async (dispatch) => {
   }
 };
 
-let recordUrl;
-
-export const singleRecordRequest = (id) => async (dispatch) => {
+export const singleRecordRequest = (id) => async (dispatch, getState) => {
   let recordType = localStorage.getItem('recordType');
+  let recordUrl;
+
   if (recordType === 'red-flag') {
     recordUrl = `${apiUrl}/red-flags/${id}`;
 
@@ -116,9 +114,10 @@ export const singleRecordRequest = (id) => async (dispatch) => {
     recordType = 'Intervention';
   }
   try {
+    dispatch(clearNotification());
     dispatch({ type: START_FETCHING });
 
-    const token = localStorage.getItem('userToken');
+    const { token } = getState().authReducer.user;
     const { data } = await axios.get(`${recordUrl}`, {
       headers: { 'x-access-token': token }
     });
@@ -135,3 +134,42 @@ export const singleRecordRequest = (id) => async (dispatch) => {
     return error.response.data.error;
   }
 };
+
+
+export const editCommentRequest = (id, newComment) => async (dispatch, getState) => {
+  let recordType = localStorage.getItem('recordType');
+  let url;
+
+  if (recordType === 'red-flag') {
+    url = `${apiUrl}/red-flags/${id}/comment`;
+
+    recordType = 'Red-Flag';
+  } else if (recordType === 'intervention') {
+    url = `${apiUrl}/interventions/${id}/comment`;
+    recordType = 'Intervention';
+  }
+
+  try {
+    dispatch(clearNotification());
+
+    const { token } = getState().authReducer.user;
+    const { data } = await axios.patch(`${url}`, { comment: newComment }, {
+      headers: { 'x-access-token': token }
+    });
+
+    const recordDetails = data.data[0].editComment;
+
+    dispatch({
+      type: GET_SINGLE_RECORD,
+      records: recordDetails,
+    });
+
+    return data;
+  } catch (error) {
+    dispatch(newNotification({
+      message: error.response.data.error,
+      notificationType: 'error',
+    }));
+  }
+};
+
