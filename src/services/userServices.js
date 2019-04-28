@@ -2,7 +2,7 @@
 import axios from 'axios';
 import {
   REGISTER_SUCCESS, REGISTER_BEGIN, REGISTER_DONE, LOGIN_SUCCESS, LOGIN_BEGIN, LOGIN_DONE, NEW_NOTIFICATION, GET_REDFLAG,
-  GET_INTERVENTION, GET_SINGLE_RECORD, START_FETCHING, STOP_FETCHING
+  GET_INTERVENTION, GET_SINGLE_RECORD, START_FETCHING, STOP_FETCHING, ADMIN_RECORDS
 } from '../actions/actionsTypes';
 import { clearNotification, newNotification } from './notificationServices';
 
@@ -195,6 +195,34 @@ export const deleteRecordRequest = (id) => async (dispatch, getState) => {
 
 
     return data;
+  } catch (error) {
+    return error.response.data.error;
+  }
+};
+
+
+export const adminRequest = () => async (dispatch, getState) => {
+  const urls = [
+    'https://ireporter247.herokuapp.com/api/v1/interventions',
+    'https://ireporter247.herokuapp.com/api/v1/red-flags'
+  ];
+
+  try {
+    const { token } = getState().authReducer.user;
+    const promises = await Promise.all(urls.map(url => axios.get(`${url}`, {
+      headers: { 'x-access-token': token }
+    })));
+    const intervention = promises[0].data.data[0].intervention;
+    const redFlag = promises[1].data.data[0].redFlag;
+    const merge = [...intervention, ...redFlag];
+    const allIncident = merge.sort((a, b) => a.id - b.id);
+
+    dispatch({
+      type: ADMIN_RECORDS,
+      records: allIncident,
+    });
+
+    return promises;
   } catch (error) {
     return error.response.data.error;
   }

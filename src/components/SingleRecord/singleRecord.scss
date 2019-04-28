@@ -5,7 +5,7 @@
 }
 
 .edit-btn {
-  color: var(--main-color);
+  color: $main-color;
   float: right;
   font-weight: 600;
   cursor: pointer;
@@ -50,7 +50,7 @@
 
 .outline {
   transition: all 80ms linear;
-  background: #fff;
+  background: $text-color;
   box-shadow: inset 0 0 0 1px rgba(29, 28, 29, 0.3);
   color: #1d1c1d;
   font-weight: 700;
@@ -60,13 +60,13 @@
   margin-left: 80px;
   transition: all 80ms linear;
   background: #007a5a;
-  color: #fff;
+  color: $text-color;
   font-weight: 900;
   box-shadow: none;
 }
 
 .edit-btn {
-  color: var(--main-color);
+  color: $main-color;
   float: right;
   font-weight: 600;
   cursor: pointer;
@@ -126,7 +126,7 @@ img {
 }
 
 .fa-trash:hover {
-  color: var(--primary-color);
+  color: $primary-color;
 }
 
 // .modal {
@@ -145,7 +145,7 @@ img {
 
 .del-content {
   border-radius: 8px;
-  background: #fff;
+  background: $text-color;
   width: 500px;
   margin-right: auto;
   margin-left: auto;
@@ -178,7 +178,7 @@ img {
 
 .close-page:hover,
 .close-page:focus {
-  color: var(--primary-color);
+  color: $primary-color;
   text-decoration: none;
   cursor: pointer;
 }
@@ -204,8 +204,8 @@ img {
 }
 
 .bg-red {
-  background: var(--primary-color);
-  color: var(--text-color);
+  background: $primary-color;
+  color: text-color;
   border-radius: 4px;
   cursor: pointer;
   border: none;
