@@ -18,6 +18,7 @@ class Intervention extends Component {
   }
 
 
+
   render() {
     const { isLoading, records } = this.props;
     return (
@@ -27,7 +28,7 @@ class Intervention extends Component {
         </div>
         <div className="record-container">
           <ul className="record-items">
-            {records.map(item => (
+            {records.length && records.map(item => (
               <li className="list" key={item.id}>
                 <div>
                   <p className="type">
@@ -36,12 +37,12 @@ class Intervention extends Component {
                   </p>
                 </div>
                 <div id="image-frame">
-                  <Link to="/intervention" target="_self" className="red-flag">
+                  <Link to={`/records/${item.id}`} target="_self" className="red-flag">
                     {item.images.length === 0 ? <p>No Image Uploaded</p> : <img src={(item.images.slice(0, 1))} alt="" className="item" height="200" width="240" />}
                   </Link>
                 </div>
                 <div className="comment-div">
-                  <Link to="/intervention" title="intervention" className="comment">
+                  <Link to={`/records/${item.id}`} title="intervention" className="comment">
                     {item.comment.slice(0, 150)}
                     ...
                   </Link>
