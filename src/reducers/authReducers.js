@@ -3,10 +3,16 @@ import {
   REGISTER_SUCCESS, REGISTER_BEGIN, REGISTER_DONE, LOGIN_SUCCESS, LOGIN_BEGIN, LOGIN_DONE
 } from '../actions/actionsTypes';
 
-const initialState = {
-  user: {},
-  isLoading: false,
-};
+let initialState;
+
+try {
+  initialState = JSON.parse(localStorage.getItem('store')).authReducer;
+} catch (error) {
+  initialState = {
+    user: {},
+    isLoading: false,
+  };
+}
 
 export const authReducer = (state = initialState, action = {}) => {
   switch (action.type) {
