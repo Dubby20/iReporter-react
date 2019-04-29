@@ -8,6 +8,7 @@ import RedFlag from './components/RedFlag/RedFlag';
 import Intervention from './components/Intervention/Intervention';
 import SingleRecord from './components/SingleRecord/singleRecord';
 import Admin from './components/Admin/Admin';
+import Profile from './components/Profile/Profile';
 
 const Router = () => (
   <Switch>
@@ -16,8 +17,9 @@ const Router = () => (
     <Route exact path="/login" component={Login} />
     <Route exact path="/redFlag" component={RedFlag} />
     <Route exact path="/intervention" component={Intervention} />
-    <Route exact path="/records/:id" component={SingleRecord} />
+    <Route exact path="/records/:type/:id" component={SingleRecord} />
     <Route exact path="/admin" component={Admin} />
+    <Route exact path="/profile" component={Profile} />
     <Route path="*" component={NotFoundPage} />
   </Switch>
 );

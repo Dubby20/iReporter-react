@@ -25,16 +25,16 @@ class SingleRecord extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
 
     const {
       match: {
-        params: { id }
+        params: { id, type }
       },
       singleRecordRequest
     } = this.props;
 
-    singleRecordRequest(id);
+    await singleRecordRequest({ id, type });
   }
 
   renderImage = (image = []) => {
@@ -73,16 +73,15 @@ class SingleRecord extends Component {
   handleClick = async (event) => {
     const { target } = event;
     const { match: {
-      params: { id }
+      params: { id, type }
     }, editComment, deleteRecord, history } = this.props;
     const { commentInput } = this.state;
-
     switch (target.name) {
       case 'cancel':
         this.toggleCommentInput();
         break;
       case 'save':
-        await editComment(id, commentInput);
+        await editComment({ id, type, newComment: commentInput });
         this.toggleCommentInput();
         break;
       case 'delete':
@@ -101,7 +100,7 @@ class SingleRecord extends Component {
   }
 
   render() {
-    const { isLoading, records, user } = this.props;
+    const { isLoading, record, user } = this.props;
     const { isVisible, showModal } = this.state;
 
     if (isLoading) {
@@ -112,22 +111,22 @@ class SingleRecord extends Component {
       <div className="record-container">
         <div className="main-content">
           <p className="type">
-            {`Type: ${records.type}`}
+            {`Type: ${record.type}`}
           </p>
           <p className="status-p">
-            {`Status: ${records.status}`}
+            {`Status: ${record.status}`}
           </p>
           <p className="location">
-            {`Location: ${records.location}`}
+            {`Location: ${record.location}`}
           </p>
           {!isVisible && (
             <p id="comment">
-              {records.comment}
+              {record.comment}
             </p>
           )}
         </div>
         {
-          user.id === records.user_id && (
+          user.id === record.user_id && (
             <div className="actions">
               <Link to="/" className="edit-btn change-location">
                 Change location
@@ -146,7 +145,7 @@ class SingleRecord extends Component {
         <div className="comment-div">
           {isVisible && (
             <Comment
-              initialValue={records.comment}
+              initialValue={record.comment}
               handleClick={this.handleClick}
               handleChange={this.handleChange}
             />
@@ -164,18 +163,18 @@ class SingleRecord extends Component {
         <div id="image-frame">
           <ul className="image-layout">
             <li className="image-list">
-              {this.renderImage(records.images)}
+              {this.renderImage(record.images)}
             </li>
           </ul>
         </div>
         <div className="video-frame">
           <ul className="video-layout">
             <li className="video-list">
-              {this.renderVideo(records.videos)}
+              {this.renderVideo(record.videos)}
             </li>
           </ul>
         </div>
-        {user.id === records.user_id && (
+        {user.id === record.user_id && (
           <div className="delete-record action-btn">
             <button type="submit" className="trash" onClick={this.toggleModal}><i className="fas fa-trash fa-color fa-2x" /></button>
           </div>
@@ -209,16 +208,16 @@ SingleRecord.propTypes = {
 
 const mapStateToProps = state => ({
   isLoading: state.recordReducer.isLoading,
-  records: state.recordReducer.records,
+  record: state.recordReducer.record,
   user: state.authReducer.user.user,
 });
 
 const mapDispatchToProps = dispatch => ({
-  singleRecordRequest: id => dispatch(singleRecordRequest(id)),
-  editComment: (id, newComment) => dispatch(editCommentRequest(id, newComment)),
+  singleRecordRequest: payload => dispatch(singleRecordRequest(payload)),
+  editComment: payload => dispatch(editCommentRequest(payload)),
   deleteRecord: id => dispatch(deleteRecordRequest(id))
-
 });
+
 
 const connectedSingleRecord = connect(mapStateToProps, mapDispatchToProps)(SingleRecord);
 

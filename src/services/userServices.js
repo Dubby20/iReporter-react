@@ -2,7 +2,7 @@
 import axios from 'axios';
 import {
   REGISTER_SUCCESS, REGISTER_BEGIN, REGISTER_DONE, LOGIN_SUCCESS, LOGIN_BEGIN, LOGIN_DONE, NEW_NOTIFICATION, GET_REDFLAG,
-  GET_INTERVENTION, GET_SINGLE_RECORD, START_FETCHING, STOP_FETCHING, ADMIN_RECORDS
+  GET_INTERVENTION, GET_SINGLE_RECORD, START_FETCHING, STOP_FETCHING, ADMIN_RECORDS, PROFILE_HISTORY
 } from '../actions/actionsTypes';
 import { clearNotification, newNotification } from './notificationServices';
 
@@ -101,17 +101,13 @@ export const interventionRequest = () => async (dispatch, getState) => {
   }
 };
 
-export const singleRecordRequest = (id) => async (dispatch, getState) => {
-  let recordType = localStorage.getItem('recordType');
+export const singleRecordRequest = ({ id, type }) => async (dispatch, getState) => {
   let recordUrl;
 
-  if (recordType === 'red-flag') {
+  if (type === 'red-flag') {
     recordUrl = `${apiUrl}/red-flags/${id}`;
-
-    recordType = 'Red-Flag';
-  } else if (recordType === 'intervention') {
+  } else if (type === 'intervention') {
     recordUrl = `${apiUrl}/interventions/${id}`;
-    recordType = 'Intervention';
   }
   try {
     dispatch(clearNotification());
@@ -125,7 +121,7 @@ export const singleRecordRequest = (id) => async (dispatch, getState) => {
 
     dispatch({
       type: GET_SINGLE_RECORD,
-      records: recordList,
+      record: recordList,
     });
 
     dispatch({ type: STOP_FETCHING });
@@ -136,17 +132,13 @@ export const singleRecordRequest = (id) => async (dispatch, getState) => {
 };
 
 
-export const editCommentRequest = (id, newComment) => async (dispatch, getState) => {
-  let recordType = localStorage.getItem('recordType');
+export const editCommentRequest = ({ id, type, newComment }) => async (dispatch, getState) => {
   let url;
-
-  if (recordType === 'red-flag') {
+  if (type === 'red-flag') {
     url = `${apiUrl}/red-flags/${id}/comment`;
 
-    recordType = 'Red-Flag';
-  } else if (recordType === 'intervention') {
+  } else if (type === 'intervention') {
     url = `${apiUrl}/interventions/${id}/comment`;
-    recordType = 'Intervention';
   }
 
   try {
@@ -161,7 +153,7 @@ export const editCommentRequest = (id, newComment) => async (dispatch, getState)
 
     dispatch({
       type: GET_SINGLE_RECORD,
-      records: recordDetails,
+      record: recordDetails,
     });
 
     return data;
@@ -222,6 +214,43 @@ export const adminRequest = () => async (dispatch, getState) => {
       records: allIncident,
     });
 
+    return promises;
+  } catch (error) {
+    return error.response.data.error;
+  }
+};
+
+export const profileRequest = () => async (dispatch, getState) => {
+  const userId = getState().authReducer.user.user.id;
+  const urls = [
+    `https://ireporter247.herokuapp.com/api/v1/users/${userId}/interventions`,
+    `https://ireporter247.herokuapp.com/api/v1/users/${userId}/red-flags`
+
+  ];
+
+  try {
+    const { token } = getState().authReducer.user;
+    const promises = await Promise.all(urls.map(url => axios.get(`${url}`, {
+      headers: { 'x-access-token': token }
+    })));
+    const intervention = promises[0].data.data[0].interventions;
+    const redFlag = promises[1].data.data[0].redFlags;
+    const merge = [...intervention, ...redFlag];
+    const allRecords = merge.sort((a, b) => a.id - b.id);
+
+    dispatch({
+      type: PROFILE_HISTORY,
+      records: allRecords,
+      redFlagDrafts: allRecords.filter(record => record.type === 'red-flag' && record.status === 'draft').length,
+      redFlagUnderInvestigation: allRecords.filter(record => record.type === 'red-flag' && record.status === 'under-investigation').length,
+      redFlagResolved: allRecords.filter(record => record.type === 'red-flag' && record.status === 'resolved').length,
+      redFlagRejected: allRecords.filter(record => record.type === 'red-flag' && record.status === 'rejected').length,
+      interventionDrafts: allRecords.filter(record => record.type === 'intervention' && record.status === 'draft').length,
+      interventionUnderInvestigation: allRecords.filter(record => record.type === 'intervention' && record.status === 'under-investigation').length,
+      interventionResolved: allRecords.filter(record => record.type === 'intervention' && record.status === 'resolved').length,
+      interventionRejected: allRecords.filter(record => record.type === 'intervention' && record.status === 'rejected').length,
+
+    });
     return promises;
   } catch (error) {
     return error.response.data.error;
