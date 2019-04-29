@@ -1,9 +1,12 @@
-import { GET_REDFLAG, GET_INTERVENTION, GET_SINGLE_RECORD, START_FETCHING, STOP_FETCHING, ADMIN_RECORDS } from '../actions/actionsTypes';
+import { GET_REDFLAG, GET_INTERVENTION, GET_SINGLE_RECORD, START_FETCHING, STOP_FETCHING, ADMIN_RECORDS, PROFILE_HISTORY } from '../actions/actionsTypes';
 
 const initialState = {
   records: [],
   isLoading: false,
-  isVisible: false
+  isVisible: false,
+  redFlagDrafts: 0,
+  interventionDrafts: 0,
+  record: {}
 };
 
 const recordReducer = (state = initialState, action) => {
@@ -13,12 +16,16 @@ const recordReducer = (state = initialState, action) => {
         ...state, isLoading: true
       };
 
+    case GET_SINGLE_RECORD:
+      return {
+        ...state, record: action.record
+      };
     case GET_REDFLAG:
     case GET_INTERVENTION:
-    case GET_SINGLE_RECORD:
     case ADMIN_RECORDS:
+    case PROFILE_HISTORY:
       return {
-        ...state, records: action.records
+        ...state, ...action
       };
 
     case STOP_FETCHING:
