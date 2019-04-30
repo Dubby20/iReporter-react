@@ -2,7 +2,7 @@
 import axios from 'axios';
 import {
   REGISTER_SUCCESS, REGISTER_BEGIN, REGISTER_DONE, LOGIN_SUCCESS, LOGIN_BEGIN, LOGIN_DONE, NEW_NOTIFICATION, GET_REDFLAG,
-  GET_INTERVENTION, GET_SINGLE_RECORD, START_FETCHING, STOP_FETCHING, ADMIN_RECORDS, PROFILE_HISTORY
+  GET_INTERVENTION, GET_SINGLE_RECORD, START_FETCHING, STOP_FETCHING, ADMIN_RECORDS, PROFILE_HISTORY, POST_REPORT, GET_LOCATION
 } from '../actions/actionsTypes';
 import { clearNotification, newNotification } from './notificationServices';
 
@@ -255,4 +255,57 @@ export const profileRequest = () => async (dispatch, getState) => {
   } catch (error) {
     return error.response.data.error;
   }
+};
+
+export const postReport = ({ newComment, reportType, images, videos, location }) => async (dispatch, getState) => {
+  let url;
+  if (reportType === 'red-flag') {
+    url = `${apiUrl}/red-flags`;
+
+  } else if (reportType === 'intervention') {
+    url = `${apiUrl}/interventions`;
+  }
+
+  try {
+    dispatch(clearNotification());
+
+    const { token } = getState().authReducer.user;
+    const { data } = await axios.post(`${url}`, { comment: newComment, reportType, images, videos, location }, {
+      headers: { 'x-access-token': token }
+    });
+
+
+
+    dispatch({
+      type: POST_REPORT,
+      report: data,
+    });
+
+    return data;
+  } catch (error) {
+    dispatch(newNotification({
+      message: error.response.data.error,
+      notificationType: 'error',
+    }));
+  }
+};
+
+export const getLocation = () => (dispatch) => {
+  const geolocation = navigator.geolocation;
+
+  const location = new Promise((resolve, reject) => {
+    if (!geolocation) {
+      reject(new Error('Not Supported'));
+    }
+
+    geolocation.getCurrentPosition((position) => {
+      resolve(position);
+    }, () => {
+      reject(new Error('Permission denied'));
+    });
+  });
+  dispatch({
+    type: GET_LOCATION,
+    location: location
+  });
 };

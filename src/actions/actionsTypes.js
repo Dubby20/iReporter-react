@@ -15,3 +15,5 @@ export const STOP_FETCHING = "STOP_FETCHING";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 export const ADMIN_RECORDS = "ADMIN_RECORDS";
 export const PROFILE_HISTORY = "PROFILE_HISTORY";
+export const GET_LOCATION = 'GET_LOCATION';
+export const POST_REPORT = 'POST_REPORT';

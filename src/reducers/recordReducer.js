@@ -1,4 +1,7 @@
-import { GET_REDFLAG, GET_INTERVENTION, GET_SINGLE_RECORD, START_FETCHING, STOP_FETCHING, ADMIN_RECORDS, PROFILE_HISTORY } from '../actions/actionsTypes';
+import {
+  GET_REDFLAG, GET_INTERVENTION, GET_SINGLE_RECORD, START_FETCHING,
+  STOP_FETCHING, ADMIN_RECORDS, PROFILE_HISTORY, GET_LOCATION, POST_REPORT
+} from '../actions/actionsTypes';
 
 const initialState = {
   records: [],
@@ -6,7 +9,13 @@ const initialState = {
   isVisible: false,
   redFlagDrafts: 0,
   interventionDrafts: 0,
-  record: {}
+  record: {},
+  report: {},
+  payload: location,
+  coords: {
+    latitude: 0,
+    longitude: 0
+  }
 };
 
 const recordReducer = (state = initialState, action) => {
@@ -28,9 +37,19 @@ const recordReducer = (state = initialState, action) => {
         ...state, ...action
       };
 
+    case POST_REPORT:
+      return {
+        ...state, report: action.report
+      };
+
     case STOP_FETCHING:
       return {
         ...state, isLoading: false
+      };
+
+    case GET_LOCATION:
+      return {
+        ...state, location: action.payload
       };
 
     default:
