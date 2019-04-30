@@ -12,7 +12,8 @@ body {
     width: 100%;
     min-height: 100vh;
     font-weight: 400;
-    background: #ffffff;
+    // font-size: 1rem;
+    background: $text-color;
     color: #383838;
   }
 
@@ -183,7 +184,7 @@ body {
     }
   
     .table-responsive > .table > tbody > tr > td {
-      background-color: #fff;
+      background-color: $text-color;
       display: block;
       text-align: right;
     }
@@ -211,7 +212,7 @@ body {
   
     .table-responsive > .table-border > tbody > tr > td,
     .table-responsive > .table-border > tbody > tr:nth-child(odd) {
-      background-color: #fff;
+      background-color: $text-color;
     }
   
     .table-responsive > .table-border > tbody > tr > td:nth-child(odd) {
@@ -228,20 +229,30 @@ body {
     }
   }
   
-  @media only screen and (min-width: 450px) {
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 4;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.4);
-      padding-top: 4px;
-    }
-  
+@media only screen and (min-width: 450px) {
+  .modal {
+    position: fixed;
+    z-index: 4;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 4px;
+  }
+
+  .modal-content {
+    background-color: #fafafa;
+    margin: 5% auto 15% auto;
+    padding: 8px;
+    width: 360px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+    animation-name: modalopen;
+    animation-duration: 1s;
+    border-radius: 4px;
+    border: none;
+  }
 }
 
 .signUp-login {
@@ -334,4 +345,73 @@ body {
   .account a:hover {
     color: $primary-color;
   }
+
+  .record-container {
+    margin: 60px 20px;
+  }
+  
+  .list {
+    list-style-type: none;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 32px;
+    background: #f5f5f5;
+    padding: 16px;
+    border: 1px solid #e5e5e5;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 5px 0px;
+  }
+
+  .modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 8%;
+  }
+  
+  .modal-content {
+    background-color: #fafafa;
+    margin: 5% auto 15% auto;
+    padding: 40px;
+    width: 50%;
+    height: auto;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+    animation-duration: 1s;
+    border-radius: 12px;
+  }
+  
+  .close-btn,
+  .close-page {
+    top: 0;
+    color: #000;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+    padding-right: 8px;
+  }
+
+  .close-btn:hover,
+.close-btn:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.close-page:hover,
+.close-page:focus {
+  color: var(--primary-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+// .modal-content textarea {
+//   font-weight: 600;
+//   margin-bottom: 16px;
+// }
+
   
