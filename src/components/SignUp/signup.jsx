@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable jsx-a11y/no-autofocus */
 /* eslint-disable global-require */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
@@ -12,7 +10,7 @@ import Loader from '../Loader/Loader';
 import Notification from '../Notification/Notification';
 import './signup.scss';
 
-class Signup extends Component {
+export class Signup extends Component {
   constructor(props) {
     super(props);
 
@@ -41,7 +39,7 @@ class Signup extends Component {
     const { registerRequest, isLoading } = this.props;
 
     return (
-      <div className="page-container">
+      <div className="page-container signup-container">
         <div className="signUp-login">
           <h3>Create an account</h3>
           <Notification />
@@ -87,7 +85,7 @@ class Signup extends Component {
                 </div>
                 <ErrorMessage name="confirmPassword">{msg => <div className="error error-message">{msg}</div>}</ErrorMessage>
                 <div className="form-group">
-                  <input type="password" name="confirmPassword" onChange={props.handleChange} placeholder="Confirm Password" id="confirmPassword" className="form-control" />
+                  <input type="password" name="confirmPassword" value={props.values.password} onChange={props.handleChange} placeholder="Confirm Password" id="confirmPassword" className="form-control" />
                 </div>
                 <div className="form-group btn-div">
                   <input type="submit" value="SIGN UP" className="auth-btn" />

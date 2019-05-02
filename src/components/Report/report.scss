@@ -50,8 +50,10 @@
     color: $primary-color;
   }
   
-  #location-code {
-    padding-top: 8px;
-    font-weight: 600;
+  .location-display {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
   }
   

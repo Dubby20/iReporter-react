@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/no-autofocus */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -12,7 +10,7 @@ import Notification from '../Notification/Notification';
 import './login.scss';
 
 
-class Login extends Component {
+export class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -24,7 +22,7 @@ class Login extends Component {
     };
   }
 
-  
+
 
   redirect = (to) => {
     const { history } = this.props;
@@ -35,7 +33,7 @@ class Login extends Component {
     const { userInfo } = this.state;
     const { loginRequest, isLoading } = this.props;
     return (
-      <div className="page-container">
+      <div className="page-container login-container">
         <div className="signUp-login">
           <h3>Login</h3>
           <Notification />
@@ -44,26 +42,26 @@ class Login extends Component {
             validationSchema={loginValidationSchema}
             onSubmit={async (values, { setSubmitting }) => {
               if (await loginRequest(values)) {
-                const {user} = this.props;
-                  if (user.isAdmin) {
-                    this.redirect('/admin');
-                  } else {
-                    this.redirect('/');
-                  }
+                const { user } = this.props;
+                if (user.isAdmin) {
+                  this.redirect('/admin');
+                } else {
+                  this.redirect('/');
+                }
                 setSubmitting(true);
               }
             }}
           >
             {props => (
-              <Form id="loginForm" onSubmit={props.handleSubmit}>
+              <Form id="loginForm" className="form" onSubmit={props.handleSubmit}>
                 <ErrorMessage name="email">{msg => <div className="error error-message">{msg}</div>}</ErrorMessage>
                 <div className="form-group">
-                  <input type="email" name="email" value={props.values.email} onChange={props.handleChange} placeholder="Email" autoFocus required id="email" className="form-control" />
+                  <input type="email" name="email" value={props.values.email} onChange={props.handleChange} placeholder="Email" autoFocus id="email" className="form-control" />
                 </div>
 
                 <ErrorMessage name="password">{msg => <div className="error error-message">{msg}</div>}</ErrorMessage>
                 <div className="form-group">
-                  <input type="password" name="password" value={props.values.password} onChange={props.handleChange} placeholder="Password" required id="password" className="form-control" />
+                  <input type="password" name="password" value={props.values.password} onChange={props.handleChange} placeholder="Password" id="password" className="form-control" />
                 </div>
 
                 <div className="form-group">

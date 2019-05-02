@@ -1,6 +1,6 @@
 import {
   GET_REDFLAG, GET_INTERVENTION, GET_SINGLE_RECORD, START_FETCHING,
-  STOP_FETCHING, ADMIN_RECORDS, PROFILE_HISTORY, GET_LOCATION, POST_REPORT
+  STOP_FETCHING, ADMIN_RECORDS, PROFILE_HISTORY, POST_REPORT
 } from '../actions/actionsTypes';
 
 const initialState = {
@@ -11,11 +11,6 @@ const initialState = {
   interventionDrafts: 0,
   record: {},
   report: {},
-  payload: location,
-  coords: {
-    latitude: 0,
-    longitude: 0
-  }
 };
 
 const recordReducer = (state = initialState, action) => {
@@ -45,11 +40,6 @@ const recordReducer = (state = initialState, action) => {
     case STOP_FETCHING:
       return {
         ...state, isLoading: false
-      };
-
-    case GET_LOCATION:
-      return {
-        ...state, location: action.payload
       };
 
     default:

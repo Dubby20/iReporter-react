@@ -1,5 +1,4 @@
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable jsx-a11y/heading-has-content */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { adminRequest } from '../../services/userServices';
@@ -24,7 +23,7 @@ class Admin extends Component {
       return <div className="center"><Loader /></div>;
     }
     return (
-      <div>
+      <div className="admin-page">
         <div>
           <h2 className="status-title">Red-Flags Status</h2>
           <div className="admin-container">

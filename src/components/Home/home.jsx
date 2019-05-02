@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './home.scss';
 
 const Home = () => (
-  <div>
+  <div className="home-container">
     <article className="slide-img">
       <div className="banner">
         <div className="banner-text">

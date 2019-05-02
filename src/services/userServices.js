@@ -257,7 +257,8 @@ export const profileRequest = () => async (dispatch, getState) => {
   }
 };
 
-export const postReport = ({ newComment, reportType, images, videos, location }) => async (dispatch, getState) => {
+export const postReport = ({ comment, reportType, image, video, location }) => async (dispatch, getState) => {
+
   let url;
   if (reportType === 'red-flag') {
     url = `${apiUrl}/red-flags`;
@@ -267,45 +268,50 @@ export const postReport = ({ newComment, reportType, images, videos, location })
   }
 
   try {
+    const images = [];
+    const videos = [];
+    let formData;
+
     dispatch(clearNotification());
+    dispatch({ type: START_FETCHING });
+
+
+    if (images.length) {
+      formData = new FormData();
+      formData.append('file', image);
+      formData.append('upload_preset', 'yftnq9xd');
+      await axios.post('https://api.cloudinary.com/v1_1/djdsxql5q/image/upload',
+        formData).then(data => {
+          images.push(data.data.secure_url);
+        });
+    }
+    if (videos.length) {
+      formData = new FormData();
+      formData.append('file', video);
+      formData.append('upload_preset', 'yftnq9xd');
+      await axios.post('https://api.cloudinary.com/v1_1/djdsxql5q/video/upload',
+        formData).then(data => {
+          videos.push(data.data.secure_url);
+        });
+    }
 
     const { token } = getState().authReducer.user;
-    const { data } = await axios.post(`${url}`, { comment: newComment, reportType, images, videos, location }, {
+    const { data } = await axios.post(`${url}`, { comment, reportType, images, videos, location }, {
       headers: { 'x-access-token': token }
     });
-
-
 
     dispatch({
       type: POST_REPORT,
       report: data,
     });
 
+    dispatch({ type: STOP_FETCHING });
     return data;
+
   } catch (error) {
     dispatch(newNotification({
       message: error.response.data.error,
       notificationType: 'error',
     }));
   }
-};
-
-export const getLocation = () => (dispatch) => {
-  const geolocation = navigator.geolocation;
-
-  const location = new Promise((resolve, reject) => {
-    if (!geolocation) {
-      reject(new Error('Not Supported'));
-    }
-
-    geolocation.getCurrentPosition((position) => {
-      resolve(position);
-    }, () => {
-      reject(new Error('Permission denied'));
-    });
-  });
-  dispatch({
-    type: GET_LOCATION,
-    location: location
-  });
 };

@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -14,7 +13,8 @@ class Intervention extends Component {
   }
 
   componentDidMount() {
-    this.props.interventionRequest();
+    const { interventionRequest } = this.props;
+    interventionRequest();
   }
 
 
@@ -22,7 +22,7 @@ class Intervention extends Component {
   render() {
     const { isLoading, records } = this.props;
     return (
-      <div className="container">
+      <div className="container intervention-container">
         <div className="center">
           {isLoading ? <Loader /> : ''}
         </div>
