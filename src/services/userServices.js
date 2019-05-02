@@ -1,8 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import {
-  REGISTER_SUCCESS, REGISTER_BEGIN, REGISTER_DONE, LOGIN_SUCCESS, LOGIN_BEGIN, LOGIN_DONE, NEW_NOTIFICATION, GET_REDFLAG,
-  GET_INTERVENTION, GET_SINGLE_RECORD, START_FETCHING, STOP_FETCHING, ADMIN_RECORDS, PROFILE_HISTORY, POST_REPORT, GET_LOCATION
+  REGISTER_SUCCESS, REGISTER_BEGIN, REGISTER_DONE, LOGIN_SUCCESS, LOGIN_BEGIN, LOGIN_DONE,
+  NEW_NOTIFICATION, GET_REDFLAG, GET_INTERVENTION, GET_SINGLE_RECORD, START_FETCHING,
+  STOP_FETCHING, ADMIN_RECORDS, PROFILE_HISTORY, POST_REPORT, GET_LOCATION, LOG_OUT
 } from '../actions/actionsTypes';
 import { clearNotification, newNotification } from './notificationServices';
 
@@ -53,6 +54,14 @@ export const loginRequest = (user) => async (dispatch) => {
       notificationType: 'error',
     }));
   }
+};
+
+export const logOut = () => async (dispatch) => {
+  localStorage.removeItem('store');
+  dispatch({
+    type: LOG_OUT,
+  });
+
 };
 
 export const redFlagRequest = () => async (dispatch, getState) => {

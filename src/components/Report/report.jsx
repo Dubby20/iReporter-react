@@ -17,7 +17,7 @@ class Report extends Component {
 
   render() {
     const { postReport, isLoading } = this.props;
-    const { coords: { latitude, longitude }, getLocation } = this.props;
+
     return (
       <div className="page-container page-border">
         <div className="heading">
@@ -89,11 +89,7 @@ class Report extends Component {
                   <ErrorMessage name="location">{msg => <div className="error error-message">{msg}</div>}</ErrorMessage>
                   <button type="submit" className="location-btn" onClick={this.getLocation}>Get my current location</button>
                   <p id="location-code">{props.values.location}</p>
-                  <p id="location-code">
-                    {latitude}
-                    ,
-                    {longitude}
-                  </p>
+                  <p id="location-code" />
 
 
                 </div>
