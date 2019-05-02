@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import {
-  REGISTER_SUCCESS, REGISTER_BEGIN, REGISTER_DONE, LOGIN_SUCCESS, LOGIN_BEGIN, LOGIN_DONE
+  REGISTER_SUCCESS, REGISTER_BEGIN, REGISTER_DONE, LOGIN_SUCCESS, LOGIN_BEGIN, LOGIN_DONE, LOG_OUT
 } from '../actions/actionsTypes';
 
 let initialState;
@@ -32,6 +32,10 @@ export const authReducer = (state = initialState, action = {}) => {
     case LOGIN_DONE:
       return {
         ...state, isLoading: false
+      };
+    case LOG_OUT:
+      return {
+        ...state, user: {}
       };
 
     default:
