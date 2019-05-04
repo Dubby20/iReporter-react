@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { adminRequest } from '../../services/userServices';
+import adminRequest from '../../actions/adminActions';
 import Loader from '../Loader/Loader';
 import './admin.scss';
 
@@ -119,38 +119,6 @@ class Admin extends Component {
             </tbody>
           </table>
         </div>
-        {/* <div className="modal">
-          <div className="modal-content animate">
-            <span className="close-btn">&times;</span>
-            <div className="modal-body">
-              <form action="" method="POST">
-                <label htmlFor="comment">Comment:</label>
-                <div className="form-group">
-                  <textarea name="" id="" cols="20" rows="10" maxLength="2000" required className="form-control">{item.comment}</textarea>
-                </div>
-                <div className="form-group location-div">
-                  <p id="location-code">{item.location}</p>
-                </div>
-                <label htmlFor="image">Images:</label>
-                <div id="image-frame">
-                  <ul className="image-layout">
-                    <li className="image-list">
-                      {imgArry(item.images)}
-                    </li>
-                  </ul>
-                </div>
-                <label htmlFor="video">Videos:</label>
-                <div className="video-frame">
-                  <ul className="video-layout">
-                    <li className="video-list">
-                      {videoArry(item.videos)}
-                    </li>
-                  </ul>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div> */}
       </div>
     );
   }

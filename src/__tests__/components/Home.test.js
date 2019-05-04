@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Home from '../../components/Home/home';
+import { Home } from '../../components/Home/Home';
 
 
 

@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { Login } from '../../components/Login/login';
+import { Login } from '../../components/Login/Login';
 
 
 describe("Login component", () => {
