@@ -2,7 +2,7 @@ import React from 'react';
 import spinner from '../../../public/images/spinner.gif';
 
 const Loader = () => (
-  <div>
+  <div className="loader">
     <img src={spinner} alt="loader" />
   </div>
 );

@@ -1,20 +1,19 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable jsx-a11y/media-has-caption */
-/* eslint-disable jsx-a11y/no-autofocus */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Loader from '../Loader/Loader';
-import { singleRecordRequest, editCommentRequest, deleteRecordRequest } from '../../services/userServices';
+import { singleRecordRequest } from '../../actions/singleRecordActions';
+import editCommentRequest from '../../actions/editcommentActions';
+import deleteRecordRequest from '../../actions/deleteRecordActions';
 import Comment from '../Comment/Comment';
 import './singleRecord.scss';
 
 
 
-class SingleRecord extends Component {
+export class SingleRecord extends Component {
   constructor(props) {
     super(props);
 
@@ -76,6 +75,7 @@ class SingleRecord extends Component {
       params: { id, type }
     }, editComment, deleteRecord, history } = this.props;
     const { commentInput } = this.state;
+
     switch (target.name) {
       case 'cancel':
         this.toggleCommentInput();

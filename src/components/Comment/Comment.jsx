@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-autofocus */
 import React, { Component } from 'react';
 import Notification from '../Notification/Notification';
 
@@ -14,7 +13,7 @@ class Comment extends Component {
     return (
       <div>
         <Notification />
-        <div className="form-group">
+        <div className="form-group commentText">
           <textarea
             name="comment"
             id="comment-area"
@@ -23,7 +22,7 @@ class Comment extends Component {
             maxLength="2000"
             autoFocus
             required
-            className="form-control"
+            className="form-control commentText"
             defaultValue={initialValue}
             onChange={handleChange}
           />

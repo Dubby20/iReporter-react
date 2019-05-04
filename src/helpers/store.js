@@ -1,10 +1,10 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { createLogger } from 'redux-logger';
+
 import rootReducer from '../reducers';
 
 const middleware = [thunk];
-const loggerMiddleware = createLogger();
+
 
 const store = createStore(
   rootReducer,
@@ -13,6 +13,7 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
+window.store = store;
 
 store.subscribe(() => {
   localStorage.setItem('store', JSON.stringify(store.getState()));

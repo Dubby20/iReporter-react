@@ -1,2 +1,0 @@
-const SUCCESS = 'SUCCESS';
-const FAILURE = 'FAILURE';

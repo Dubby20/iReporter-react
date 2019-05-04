@@ -1,10 +1,9 @@
-/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Loader from '../Loader/Loader';
-import { redFlagRequest } from '../../services/userServices';
+import { redFlagRequest } from '../../actions/redFlagActions';
 
 
 
@@ -14,14 +13,15 @@ class RedFlag extends Component {
   }
 
   componentDidMount() {
-    this.props.redFlagRequest();
+    const { redFlagRequest } = this.props;
+    redFlagRequest();
   }
 
 
   render() {
     const { isLoading, records } = this.props;
     return (
-      <div className="container">
+      <div className="container redflag-container">
         <div className="center">
           {isLoading ? <Loader /> : ''}
         </div>

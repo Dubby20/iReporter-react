@@ -6,7 +6,7 @@ import notifyReducer from './notifyReducer';
 const rootReducer = combineReducers({
   recordReducer,
   authReducer,
-  notifyReducer,
+  notifyReducer
 });
 
 export default rootReducer;

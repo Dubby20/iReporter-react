@@ -23,6 +23,8 @@
     "no-console": 1,
     "no-debugger": 1,
     "no-param-reassign": 0,
+    "react/button-has-type": 0,
+    "no-undef": 0,
     "no-var": 1,
     "semi": [
       1,
@@ -49,6 +51,13 @@
         ]
       }
     ],
+    "jsx-a11y/label-has-for": 0,
+    "jsx-a11y/heading-has-content": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "jsx-a11y/no-autofocus": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/media-has-caption": 0,
     "react/jsx-boolean-value": 1,
     "react/jsx-closing-bracket-location": 0,
     "react/jsx-curly-spacing": 1,
@@ -58,7 +67,7 @@
     "react/jsx-no-bind": 1,
     "react/jsx-no-duplicate-props": 1,
     "react/jsx-no-literals": 0,
-    "react/jsx-no-undef": 1,
+    "react/jsx-no-undef": 0,
     "react/jsx-pascal-case": 1,
     "react/jsx-sort-prop-types": 0,
     "react/jsx-sort-props": 0,
@@ -80,7 +89,14 @@
     "react/sort-comp": 1,
     "react/wrap-multilines": 0,
     "react/jsx-filename-extension": 0,
-    "react/no-unescaped-entities": 0
+    "react/no-unescaped-entities": 0,
+    "import/prefer-default-export": 0,
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ]
   },
   "env": {
     "es6": true,

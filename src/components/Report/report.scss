@@ -44,14 +44,25 @@
 
   .location-btn {
     color: #007bff;
+    cursor: pointer;
+    padding: 0.375rem 1.2rem;
+    line-height: 24px;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 10px;
+    outline: none;
+    border-radius: 4px;
+
   }
   
   .location-btn:hover {
     color: $primary-color;
   }
   
-  #location-code {
-    padding-top: 8px;
-    font-weight: 600;
+  .location-display {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
   }
   

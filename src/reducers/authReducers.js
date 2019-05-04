@@ -10,32 +10,40 @@ try {
 } catch (error) {
   initialState = {
     user: {},
+    isLoggedIn: false,
     isLoading: false,
   };
 }
 
-export const authReducer = (state = initialState, action = {}) => {
+export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case REGISTER_BEGIN:
     case LOGIN_BEGIN:
       return {
-        ...state, isLoading: true
+        ...state,
+        isLoading: true
       };
 
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       return {
-        ...state, user: action.user, isLoading: false
+        ...state,
+        isLoggedIn: true,
+        user: action.user,
+        isLoading: false
       };
 
     case REGISTER_DONE:
     case LOGIN_DONE:
       return {
-        ...state, isLoading: false
+        ...state,
+        isLoading: false
       };
     case LOG_OUT:
       return {
-        ...state, user: {}
+        ...state,
+        user: null,
+        isLoggedIn: false
       };
 
     default:
