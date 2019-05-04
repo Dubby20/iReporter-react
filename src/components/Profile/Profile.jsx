@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { profileRequest } from '../../services/userServices';
+import profileRequest from '../../actions/profileActions';
 import Loader from '../Loader/Loader';
 import './profile.scss';
 

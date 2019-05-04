@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Footer from '../../components/Footer/footer';
+import Footer from '../../components/Footer/Footer';
 
 
 

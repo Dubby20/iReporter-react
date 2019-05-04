@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import NotFound from '../../containers/404Page/notFound';
+import NotFound from '../../containers/404Page/NotFound';
 
 
 

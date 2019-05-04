@@ -6,8 +6,7 @@ import notifyReducer from './notifyReducer';
 const rootReducer = combineReducers({
   recordReducer,
   authReducer,
-  notifyReducer,
-  userRecord: 'GET_INTERVENTION'
+  notifyReducer
 });
 
 export default rootReducer;

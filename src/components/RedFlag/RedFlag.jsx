@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Loader from '../Loader/Loader';
-import { redFlagRequest } from '../../services/userServices';
+import { redFlagRequest } from '../../actions/redFlagActions';
 
 
 

@@ -34,15 +34,6 @@ describe('record reducer', () => {
     })).toEqual(initialState);
   });
 
-  it('should handle GET_REDFLAG', () => {
-    initialState.records = [];
-    initialState.isLoading = false;
-    expect(recordReducer(undefined, {
-      type: types.GET_REDFLAG,
-      records: [],
-      isLoading: false
-    })).toEqual(initialState);
-  });
 
   it('should handle POST_REPORT', () => {
     initialState.report = {};

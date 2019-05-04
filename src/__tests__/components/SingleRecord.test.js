@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { SingleRecord } from '../../components/SingleRecord/singleRecord';
+import { SingleRecord } from '../../components/SingleRecord/SingleRecord';
 
 const mockStore = configureStore([thunk]);
 let wrapper;
