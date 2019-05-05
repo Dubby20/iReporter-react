@@ -82,6 +82,7 @@ class Admin extends Component {
           </div>
         </div>
 
+
         <div className="table-responsive">
           <table className="table table-border table-striped">
             <thead>

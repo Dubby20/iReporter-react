@@ -85,7 +85,7 @@ export class Signup extends Component {
                 </div>
                 <ErrorMessage name="confirmPassword">{msg => <div className="error error-message">{msg}</div>}</ErrorMessage>
                 <div className="form-group">
-                  <input type="password" name="confirmPassword" value={props.values.password} onChange={props.handleChange} placeholder="Confirm Password" id="confirmPassword" className="form-control" />
+                  <input type="password" name="confirmPassword" value={props.values.confirmPassword} onChange={props.handleChange} placeholder="Confirm Password" id="confirmPassword" className="form-control" />
                 </div>
                 <div className="form-group btn-div">
                   <input type="submit" value="SIGN UP" className="auth-btn" />
