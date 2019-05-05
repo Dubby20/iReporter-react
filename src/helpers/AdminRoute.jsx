@@ -1,21 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import Admin from '../components/Admin/Admin';
 
 
 const AdminRoute = ({
   component: Component,
   isLoggedIn,
+  user,
   ...rest
 
 }) => (
-  <Route
+    <Route
       {...rest}
-      render={props => (isLoggedIn && isLoggedIn.user.isAdmin
+      render={props => (isLoggedIn && user.isAdmin
         ? (
           <div>
-            <Admin />
             <Component {...props} />
           </div>
         )
@@ -24,7 +23,9 @@ const AdminRoute = ({
     />
   );
 
+
 const mapStateToProps = state => ({
+  user: state.authReducer.user.user,
   isLoggedIn: state.authReducer.isLoggedIn
 });
 
