@@ -86,13 +86,14 @@ export class SingleRecord extends Component {
         break;
       case 'delete':
         await deleteRecord(id);
-        history.push('/intervention');
+          history.push('/redFlag');
         break;
       default:
         this.toggleCommentInput();
     }
   }
 
+  
   handleChange = (event) => {
     this.setState({
       commentInput: event.target.value,
@@ -128,9 +129,9 @@ export class SingleRecord extends Component {
         {
           user.id === record.user_id && (
             <div className="actions">
-              <Link to="/" className="edit-btn change-location">
+              <button className="edit-btn change-location">
                 Change location
-              </Link>
+              </button>
               <button
                 name="edit"
                 type="submit"

@@ -1,6 +1,6 @@
 /* eslint-disable import/no-named-as-default */
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import AdminRoute from './helpers/AdminRoute';
 import UserRoute from './helpers/UserRoute';
 import Home from './components/Home/Home';

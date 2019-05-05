@@ -79,9 +79,7 @@
   color: #007a5a;
 }
 
-// .hide-div {
-//   display: none;
-// }
+
 
 .image-layout,
 .video-layout {
@@ -94,8 +92,6 @@
 
 .image-layout li,
 .video-layout li {
-  /* flex: 0 1 auto; */
-  /* padding: 10px 15px; */
   margin: 12px;
 }
 
@@ -105,43 +101,37 @@ img {
 
 .delete-record {
   margin-top: 60px;
+  text-align: center;
 }
 
 .fas {
   display: inline-block;
-  cursor: pointer;
+  
 }
 
 .fa-trash {
   color: #5b616a;
   outline: none;
+  
+}
+
+.fa-color {
+  color: $primary-color;
 }
 
 .trash {
   border: none;
+  cursor: pointer;
+  
 
   & > * {
     pointer-events: none;
   }
 }
 
-.fa-trash:hover {
+.trash:hover {
   color: $primary-color;
 }
-
-// .modal {
-//   display: none;
-//   position: fixed;
-//   z-index: 1;
-//   left: 0;
-//   top: 0;
-//   height: 100%;
-//   width: 100%;
-//   overflow: auto;
-//   background-color: rgb(0, 0, 0);
-//   background-color: rgba(0, 0, 0, 0.4);
-//   padding-top: 8%;
-// }
 
 .del-content {
   border-radius: 8px;
