@@ -13,30 +13,12 @@ export class Report extends Component {
     super(props);
 
     this.state = {
-      location: '',
+      // location: '',
       images: [],
       videos: []
     };
   }
 
-  getLocation = async () => {
-    const geolocation = navigator.geolocation;
-
-    if (!geolocation) {
-      throw new Error('Not Supported');
-    }
-
-    const location = await new Promise((resolve, reject) => {
-      geolocation.getCurrentPosition(
-        (position) => resolve(position),
-        () => reject(new Error('Permission denied'))
-      );
-    });
-
-    this.setState({
-      location: `${location.coords.latitude}, ${location.coords.longitude}`,
-    });
-  };
 
   updateImage = (e) => {
     this.setState({ images: [e.target.files[0]] });
@@ -53,7 +35,7 @@ export class Report extends Component {
 
   render() {
     const { postReport, isLoading } = this.props;
-    const { location } = this.state;
+    
 
     return (
       <div className="page-container page-border">
@@ -81,8 +63,14 @@ export class Report extends Component {
             const { images, videos } = this.state;
             values.image = images;
             values.video = videos;
+            
+            await postReport({ ...values });
+            if (values.reportType === 'red-flag') {
+              this.redirect('/redFlag');
+            } else {
+              this.redirect('/intervention');
+            }
 
-            postReport({ ...values, location });
             setSubmitting(true);
           }}
 
@@ -134,12 +122,11 @@ export class Report extends Component {
                   <input
                     name="location"
                     className="location-display"
-                    ref={this.locationInput}
+                    placeholder="Enter your location"
                     type="text"
-                    value={location}
+                    value={props.values.location}
                     onChange={props.handleChange}
                   />
-                  <button type="button" className="location-btn" onClick={this.getLocation}>Get my current location</button>
                 </div>
                 <div className="form-group btn-div">
                   <input
