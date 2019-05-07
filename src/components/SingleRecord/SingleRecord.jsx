@@ -98,6 +98,7 @@ export class SingleRecord extends Component {
   }
 
 
+
   handleChange = (event) => {
     this.setState({
       commentInput: event.target.value,
