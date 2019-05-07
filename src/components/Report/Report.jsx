@@ -13,7 +13,6 @@ export class Report extends Component {
     super(props);
 
     this.state = {
-      // location: '',
       images: [],
       videos: []
     };
