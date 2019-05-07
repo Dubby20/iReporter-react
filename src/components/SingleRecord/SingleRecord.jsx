@@ -86,14 +86,19 @@ export class SingleRecord extends Component {
         break;
       case 'delete':
         await deleteRecord(id);
+        if (type === 'red-flag') {
           history.push('/redFlag');
+        } else {
+          history.push('/intervention');
+        }
         break;
       default:
         this.toggleCommentInput();
     }
   }
 
-  
+
+
   handleChange = (event) => {
     this.setState({
       commentInput: event.target.value,

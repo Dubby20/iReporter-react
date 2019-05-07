@@ -13,7 +13,6 @@ export class Report extends Component {
     super(props);
 
     this.state = {
-      // location: '',
       images: [],
       videos: []
     };
@@ -63,13 +62,14 @@ export class Report extends Component {
             const { images, videos } = this.state;
             values.image = images;
             values.video = videos;
-
-            postReport({ ...values });
+            
+            await postReport({ ...values });
             if (values.reportType === 'red-flag') {
               this.redirect('/redFlag');
             } else {
               this.redirect('/intervention');
             }
+
             setSubmitting(true);
           }}
 
@@ -121,7 +121,7 @@ export class Report extends Component {
                   <input
                     name="location"
                     className="location-display"
-                    // ref={this.locationInput}
+                    placeholder="Enter your location"
                     type="text"
                     value={props.values.location}
                     onChange={props.handleChange}
