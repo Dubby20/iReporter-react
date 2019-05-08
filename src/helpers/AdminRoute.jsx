@@ -10,7 +10,7 @@ const AdminRoute = ({
   ...rest
 
 }) => (
-    <Route
+  <Route
       {...rest}
       render={props => (isLoggedIn && user.isAdmin
         ? (

@@ -38,10 +38,10 @@ export class Header extends Component {
                     <li><Link to="/" onClick={logOut}>Log out</Link></li>
                   </>
                 ) : (
-                    <>
-                      <li><Link to="/login">Login</Link></li>
-                      <li><Link to="/signup">Register</Link></li>
-                    </>
+                  <>
+                    <li><Link to="/login">Login</Link></li>
+                    <li><Link to="/signup">Register</Link></li>
+                  </>
                   )
               }
             </ul>
