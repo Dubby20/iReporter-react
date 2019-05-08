@@ -8,6 +8,17 @@ import './header.scss';
 
 export class Header extends Component {
 
+
+  componentDidMount() {
+    const mainNav = document.getElementById('js-menu');
+    const navBarToggle = document.getElementById('js-navbar-toggle');
+    if (navBarToggle) {
+      navBarToggle.addEventListener('click', () => {
+        mainNav.classList.toggle('active');
+      });
+    }
+  }
+
   render() {
     const { logOut, isLoggedIn } = this.props;
     return (
@@ -21,12 +32,15 @@ export class Header extends Component {
         </div>
         <hr />
         <div>
-          <nav id="nav" role="navigation">
-            <ul>
+          <nav id="nav" role="navigation" className="navbar">
+            <span className="navbar-toggle" id="js-navbar-toggle">
+              <i className="fas fa-bars" />
+            </span>
+            <ul className="main-nav" id="js-menu">
               {
                 isLoggedIn ? (
                   <>
-                    <li><Link to="/" className="active">Home</Link></li>
+                    <li><Link to="/">Home</Link></li>
                     <li><Link to="/profile">My Profile</Link></li>
                     <li><Link to="/report">Report</Link></li>
                     <li>
