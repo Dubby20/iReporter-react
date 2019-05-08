@@ -43,10 +43,6 @@ module.exports = {
                 quality: '65-90',
                 speed: 4
               },
-              mozjpeg: {
-                progressive: true,
-                quality: 65
-              },
             },
           }
         ]
