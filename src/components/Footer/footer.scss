@@ -1,18 +1,15 @@
 @import '../../../public/styles/color.scss';
 
-footer {
-    position: relative;
-    background: $main-color;
-    width: 100%;
-    bottom: 0;
-    display: block;
-    height: 50px;
-  }
-  
-  .footer {
-    color: $text-color;
-    text-align: center;
-    padding-top: 14px;
-    font-weight: 600;
-    width: inherit;
+  .footer-container{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: $main-color;
+  color: $text-color;
+  text-align: center;
+  height: 50px;
+  padding-top: 14px;
+  font-weight: 600;
+  margin-top: 20px;
   }
