@@ -62,7 +62,7 @@ List of libraries, tools, etc used for this project
 
 ## Demo
 
-A fully functional demo of this project hosted on Heroku is available at [iReporter](https://ireporter247.herokuapp.com/)
+A fully functional demo of this project hosted on Heroku is available at [iReporter](https://ireport-frontend.herokuapp.com/)
 
 
 Running unit tests.
